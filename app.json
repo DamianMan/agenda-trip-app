@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Agenda-Trip-App",
-    "slug": "Agenda-Trip-App",
+    "slug": "blue-soul-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,14 +13,16 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.damianomanzillo.AgendaTripApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.damianomanzillo.AgendaTripApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
