@@ -51,6 +51,18 @@ export default {
       ],
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
+      [
+        "expo-splash-screen",
+        {
+          backgroundColor: "#f4ededff",
+          image: "./assets/homeLoader.png",
+          dark: {
+            image: "./assets/homeLoader.png",
+            backgroundColor: "#f4ededff",
+          },
+          imageWidth: 200,
+        },
+      ],
     ],
     extra: {
       eas: {

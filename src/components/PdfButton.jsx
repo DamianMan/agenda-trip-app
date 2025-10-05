@@ -1,9 +1,5 @@
-import React from "react";
-import { Platform } from "react-native";
 import { Button } from "react-native-paper";
-import RNHTMLtoPDF from "react-native-html-to-pdf";
-import RNFS from "react-native-fs"; // For direct file system access
-import { Alert } from "react-native";
+
 import { useState } from "react";
 import * as Print from "expo-print";
 import { shareAsync } from "expo-sharing";
