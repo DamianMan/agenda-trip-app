@@ -30,7 +30,6 @@ function TaskItem({ text, img, icon, url, isAdmin }) {
               styles.blurContainer,
               { width: !isAdmin ? (width * 90) / 100 : (width * 70) / 100 },
             ]}
-            experimentalBlurMethod={true}
           >
             <Text style={styles.text}>{isAdmin ? text : "Check Groups"}</Text>
             <FontAwesome
