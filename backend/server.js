@@ -43,7 +43,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(apiKeyAuth(/^API_KEY_/));
+// app.use(apiKeyAuth(/^API_KEY_/));
 
 const port = 3000;
 
