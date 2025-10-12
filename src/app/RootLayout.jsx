@@ -2,11 +2,14 @@ import { Stack } from "expo-router";
 import LogoutBtn from "../components/LogoutBtn";
 import PushNotificationBtn from "../components/PushNotificationBtn";
 import { useState, useEffect, useContext } from "react";
-import auth from "@react-native-firebase/auth";
 import { Redirect, router, useSegments } from "expo-router";
 import Loader from "../components/Loader";
+import { getAuth } from "@react-native-firebase/auth";
+import { getApp } from "@react-native-firebase/app";
 
 export default function RootLayout() {
+  const authInstance = getAuth(getApp());
+
   const segments = useSegments();
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
@@ -20,7 +23,7 @@ export default function RootLayout() {
   }
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = authInstance.onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 

@@ -36,6 +36,7 @@ function profileUser(props) {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [modalPassword, setModalPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   const [infoGroup, setInfoGroup] = useState({
     fullName: user?.displayName || "",
@@ -99,10 +100,35 @@ function profileUser(props) {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    setLoadingDelete(true);
+    try {
+      await axios
+        .delete(
+          `https://blue-soul-app.onrender.com/api/deleteUser/${currentUser.email}`,
+          { email: currentUser.email },
+          {
+            headers: {
+              "Content-Type": "application/json", // Default for JSON payload
+            },
+          }
+        )
+        .then((res) => {
+          Alert.alert(res.data.status, response.data.message);
+        })
+        .catch((res) => {
+          Alert.alert(res.data.status, response.data.message);
+        });
+      setLoadingDelete(false);
+    } catch (error) {
+      Alert.alert("Error", "Error making server request.");
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : height}
-      style={{ flex: 1 }}
+      style={{ flex: 1, position: "relative" }}
     >
       <ScrollView style={{ height }}>
         <ImageBackground
@@ -295,6 +321,17 @@ function profileUser(props) {
           <Loader />
         )}
       </ScrollView>
+      <View style={styles.deleteView}>
+        <Button
+          labelStyle={{ color: "#c01212ff", fontSize: 15 }}
+          style={styles.deleteBtn}
+          mode="outlined"
+          onPress={handleDeleteAccount}
+          loading={loadingDelete}
+        >
+          Delete Account
+        </Button>
+      </View>
     </KeyboardAvoidingView>
   );
 }
@@ -362,5 +399,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "aliceblue",
     opacity: 0.8,
+  },
+  deleteView: {
+    position: "absolute",
+    bottom: 20,
+    right: 10,
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  deleteBtn: {
+    color: "#c01212ff",
   },
 });

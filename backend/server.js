@@ -450,10 +450,32 @@ app.post("/api/deleteGroup", async (req, res) => {
 });
 
 // Delete user
-app.delete(`/api/deleteUser/${email}`, async (req, res) => {
-  const { email } = req.params;
+app.delete(`/api/deleteUser`, async (req, res) => {
+  const { email } = req.body;
+  await admin
+    .auth()
+    .getUserByEmail(email)
+    .then((userRecord) => {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log(`Successfully fetched user data: ${userRecord.uid}`);
+      firebaseId = userRecord.uid;
+    })
+    .catch((error) => {
+      console.log("Error fetching user data:", error);
+    });
   try {
+    let firebaseId;
+
     const deletedUser = await Users.deleteOne({ email });
+    admin
+      .auth()
+      .deleteUser(firebaseId)
+      .then(() => {
+        console.log("Successfully deleted Firebase user");
+      })
+      .catch((error) => {
+        console.log("Error deleting user:", error);
+      });
     res.json({ message: "User Deleted Succesfully", status: "Success" });
   } catch (error) {
     res.json({ message: "No User Found!", status: "Error" });

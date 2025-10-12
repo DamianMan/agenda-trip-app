@@ -85,13 +85,14 @@ export default function MyCarousel() {
         setChannels(value ?? [])
       );
     }
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
+    const notificationListener = Notifications.addNotificationReceivedListener(
+      (notification) => {
         console.log("NOTIFICATION:", notification);
         setNotification(notification);
-      });
+      }
+    );
 
-    responseListener.current =
+    const responseListener =
       Notifications.addNotificationResponseReceivedListener((response) => {
         const notificationData = response.notification.request.content.data;
         console.log("NotificationDATA:", notificationData);
@@ -106,12 +107,8 @@ export default function MyCarousel() {
         // );
       });
     return () => {
-      notificationListener.current &&
-        Notifications.removeNotificationSubscription(
-          notificationListener.current
-        );
-      responseListener.current &&
-        Notifications.removeNotificationSubscription(responseListener.current);
+      notificationListener.remove();
+      responseListener.remove();
     };
   }, []);
 

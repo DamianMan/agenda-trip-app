@@ -11,7 +11,7 @@ import {
   Image,
 } from "react-native";
 import { Icon } from "react-native-paper";
-import LottieView from "lottie-react-native";
+import Loader from "./Loader";
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,15 +32,7 @@ function HomeLoader({ loading }) {
     >
       <View style={styles.centered}>
         {/* {loading && <ActivityIndicator size={"large"} color={"lightgrey"} />} */}
-        {loading && (
-          <LottieView
-            ref={animationRef}
-            source={require("../../assets/animations/turtle.json")}
-            loop
-            autoplay
-            style={{ width: 250, height: 350 }}
-          />
-        )}
+        {loading && <Loader />}
       </View>
       <Pressable
         onPress={handlePress}
