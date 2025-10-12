@@ -23,7 +23,7 @@ admin.initializeApp({
 });
 //blue-soul.de/wp-content/uploads/2021/01/Pompeji.png
 // Connection Db
-https: main().catch((err) => console.log(err));
+main().catch((err) => console.log(err));
 
 async function main() {
   const connected = await mongoose.connect(
