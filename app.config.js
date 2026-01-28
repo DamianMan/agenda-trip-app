@@ -28,7 +28,7 @@ export default {
         backgroundColor: "#ffffff",
       },
       package: "com.blueSoul.firebaseApp",
-      versionCode: 1,
+      versionCode: 37,
       googleServicesFile:
         process.env.GOOGLE_SERVICES_JSON ||
         "./android/app/google-services.json",
