@@ -1,14 +1,12 @@
 import { router } from "expo-router";
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Pressable } from "react-native";
 import {
   View,
-  ActivityIndicator,
   StyleSheet,
   Dimensions,
   ImageBackground,
   Text,
-  Image,
 } from "react-native";
 import { Icon } from "react-native-paper";
 import Loader from "./Loader";
@@ -51,9 +49,9 @@ function HomeLoader({ loading }) {
           resizeMode="cover"
           style={styles.imageLogo}
         /> */}
-        <Text style={styles.text}>Company Name </Text>
+        <Text style={styles.text}>Login</Text>
 
-        <Icon source="arrow-right" color={"dodgerblue"} size={30} />
+        <Icon source="login" color={"dodgerblue"} size={40} />
       </Pressable>
     </ImageBackground>
   );
@@ -79,7 +77,8 @@ const styles = StyleSheet.create({
     color: "#303841",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 16,
+    fontSize: 24,
+    letterSpacing: 4,
   },
   imageLogo: { width: 200, height: 200 },
   imageContainter: {
@@ -91,6 +90,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 60,
     marginHorizontal: 60,
+    gap: 20,
 
     shadowColor: "#000",
     shadowOffset: {

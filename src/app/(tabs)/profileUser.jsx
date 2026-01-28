@@ -103,25 +103,43 @@ function profileUser(props) {
   const handleDeleteAccount = async () => {
     setLoadingDelete(true);
     try {
-      await axios
-        .delete(
-          `https://blue-soul-app.onrender.com/api/deleteUser/${currentUser.email}`,
-          { email: currentUser.email },
-          {
-            headers: {
-              "Content-Type": "application/json", // Default for JSON payload
-            },
-          }
-        )
-        .then((res) => {
-          Alert.alert(res.data.status, response.data.message);
-        })
-        .catch((res) => {
-          Alert.alert(res.data.status, response.data.message);
-        });
-      setLoadingDelete(false);
+      const response = await axios.get(
+        // 1. URL: Use the correct base endpoint
+        `https://blue-soul-app.onrender.com/api/deleteUser/${currentUser.email}`,
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        Alert.alert(response.data.status, response.data.message);
+        return;
+      }
+
+      // 4. Handle SUCCESS response
+      Alert.alert(response.data.status, response.data.message);
     } catch (error) {
-      Alert.alert("Error", "Error making server request.");
+      // 5. Handle all errors (server 4xx/5xx or network errors)
+
+      if (error.response) {
+        // Server responded with a status code outside the 2xx range
+        const { status, message } = error.response.data;
+        Alert.alert(status, message);
+      } else if (error.request) {
+        // Request was made but no response was received (e.g., network timeout)
+        Alert.alert(
+          "Network Error",
+          "No response from server. Check your connection."
+        );
+      } else {
+        // Something else happened in setting up the request
+        Alert.alert("Client Error", "Error setting up the request.");
+      }
+    } finally {
+      // 6. Ensure loading is always set to false
+      setLoadingDelete(false);
     }
   };
 

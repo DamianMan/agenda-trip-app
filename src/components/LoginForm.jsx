@@ -124,6 +124,7 @@ export default function LoginForm(props) {
       <View style={{ paddingTop: 20 }}>
         <Button
           mode="elevated"
+          contentStyle={{ flexDirection: "row-reverse" }} // 👈 THIS
           labelStyle={{ color: "#ffff", fontSize: 15 }}
           icon={({ size, color }) => (
             <Icon name="login" size={30} color="#fff" /> // Custom icon color

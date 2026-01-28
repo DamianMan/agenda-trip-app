@@ -42,7 +42,6 @@ function Logo(props) {
             source={require("../../assets/logo.png")}
             resizeMode="contain"
           /> */}
-          <Text style={styles.text}>Company Name </Text>
         </ImageBackground>
       </View>
     </View>
